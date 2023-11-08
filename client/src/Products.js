@@ -1,52 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Product from "./Product";
+import Category from "./components/Category";
 
-export default function Products() {
-  const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(""); // State to track the selected category
-  const [uniqueCategories, setUniqueCategories] = useState([]);
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((json) => {
-        setProducts(json);
-
-        // Extract unique categories
-        const uniqueCategories = [
-          ...new Set(json.map((product) => product.category)),
-        ];
-        setUniqueCategories(uniqueCategories);
-      });
-  }, []);
-
-  // Function to handle category selection
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-  };
-
-  // Function to filter products based on the selected category
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
-    : products;
-
+export default function Products({ products, addProduct, category }) {
   return (
-    <div>
-      <h1>Product Categories</h1>
-      <div>
-        {/* Category buttons */}
-        {uniqueCategories.map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategorySelect(category)}
-            className={category === selectedCategory ? "active" : ""}
-          >
-            {category}
-          </button>
+    <>
+      <h1 className="text-6xl" style={{ padding: "20px" }}>
+        Product Categories
+      </h1>
+      <Category onSelectedCategory={category} />
+      <h2>Prodcts List</h2>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {products.map((product) => (
+          <Product key={product.id} product={product} add={addProduct} />
         ))}
-        <button onClick={() => handleCategorySelect("")}>All</button>
       </div>
-      <Product products={filteredProducts} />
-    </div>
+    </>
   );
 }

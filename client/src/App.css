@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+.product-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px; /* Adjust the gap between products as needed */
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +42,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.MuiTypography-root.MuiTypography-h6 {
+  text-decoration: none;
 }
