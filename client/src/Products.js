@@ -10,7 +10,7 @@ export default function Products({ products, addProduct, category }) {
       </h1>
       <Category onSelectedCategory={category} />
       <h2>Prodcts List</h2>
-      
+
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {products.map((product) => (
           <Product key={product.id} product={product} add={addProduct} />
