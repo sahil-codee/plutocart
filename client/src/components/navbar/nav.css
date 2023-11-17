@@ -1,0 +1,71 @@
+/* Navbar.css */
+
+/* Overall Navbar Styles */
+nav {
+    background-color: #ffffff;
+    color: black;
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo Styles */
+  .logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 2em;
+    padding-left: 20px;
+  }
+  
+  /* Navigation List Styles */
+  ul {
+    list-style-type: none;
+  }
+  
+/* Navigation List Item Styles */
+ul li {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Added a smooth transition for the hover effect */
+  background-color: #fff;
+  color: #000;
+  border: none; /* Reset or override the default border */
+  outline: none; /* Remove the outline when focused */
+  font-size: 12px;
+  font-weight:600;
+}
+
+ul li:hover {
+  background-color: rgb(225, 89, 89);
+}
+
+  /* Search Input Styles */
+  input[type="text"] {
+    width: 40%;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f5f5f6;
+  }
+  
+  /* Cart Link Styles */
+  a {
+    color: #000000;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  /* Responsive Styling (optional) */
+  @media (max-width: 768px) {
+    /* Add responsive styles if needed */
+    /* Example: Reduce the width of the search input on smaller screens */
+    input[type="text"] {
+      width: 30%;
+    }
+  }
+  

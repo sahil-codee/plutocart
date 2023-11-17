@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Products from "./Products";
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
-
+import Navbar from "./components/Navbar";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -20,8 +20,16 @@ function App() {
       : "https://fakestoreapi.com/products";
 
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   }, [selectedCategory]);
 
   const addProduct = (product) => {
@@ -33,21 +41,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav
-          style={{ backgroundColor: "#333", color: "white", padding: "10px" }}
-        >
-          <h1 className="text-3xl">Product Store</h1>
-          <Link
-            to="/cart"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              marginLeft: "10px",
-            }}
-          >
-            Cart
-          </Link>
-        </nav>
+        <Navbar category={handleCategory} />
         <Routes>
           <Route
             path="/"
@@ -62,7 +56,6 @@ function App() {
           />
           <Route path="/cart" element={<Cart cart={cart} />}></Route>
         </Routes>
-
       </div>
     </Router>
   );

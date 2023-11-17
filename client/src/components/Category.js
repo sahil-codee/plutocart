@@ -1,5 +1,6 @@
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import "./navbar/nav.css";
 
 export default function Category({ onSelectedCategory }) {
   const [categories, setCategories] = useState([]);
@@ -12,26 +13,27 @@ export default function Category({ onSelectedCategory }) {
         ];
         setCategories(uniqueCategories);
       });
-  });
+  }, []);
 
   return (
     <div>
       <Stack
         direction="row"
-        spacing={8}
-        style={{ display: "flex", justifyContent: "center" }}
+        spacing={2}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
       >
-        {categories &&
-          categories.map((category) => (
-            <Button
-              style={{ borderRadius: "50px" }}
-              variant="contained"
-              key={category}
-              onClick={() => onSelectedCategory(category)}
-            >
-              {category}
-            </Button>
-          ))}
+        <ul>
+          {categories &&
+            categories.map((category) => (
+              <li key={category} onClick={() => onSelectedCategory(category)}>
+                {category.toUpperCase()}
+              </li>
+            ))}
+        </ul>
       </Stack>
     </div>
   );
